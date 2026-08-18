@@ -1,4 +1,4 @@
-Setup sudo and add user to group sudo:
+Install sudo and add user to sudo group:
 
 Run:
 
