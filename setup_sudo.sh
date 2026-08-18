@@ -9,7 +9,12 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-read -p "Enter username to add to sudo group: " USERNAME
+USERNAME="$1"
+
+if [ -z "$USERNAME" ]; then
+    echo "Usage: bash $0 USERNAME"
+    exit 1
+fi
 
 echo "Updating packages..."
 apt update
