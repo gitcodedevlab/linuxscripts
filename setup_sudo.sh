@@ -29,6 +29,7 @@ echo "Applying group changes without logout..."
 su - "$USERNAME" -c "newgrp sudo" <<EOF
 echo "Group applied. You can now use sudo."
 exit
+exit
 EOF
 
 echo "All done."
