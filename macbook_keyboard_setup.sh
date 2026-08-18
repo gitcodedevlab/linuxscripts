@@ -35,6 +35,8 @@ BACKLIGHT="/sys/class/backlight/intel_backlight"
 MAX_DISPLAY=$(cat $BACKLIGHT/max_brightness)
 STEP_DISPLAY=180
 
+echo -e "${GREEN}=== MacBook Pro 9,2 Keyboard Setup ===${NC}"
+
 KBD_LIGHT="/sys/class/leds/smc::kbd_backlight"
 MAX_KBD=$(cat $KBD_LIGHT/max_brightness)
 STEP_KBD=25
@@ -111,6 +113,9 @@ SCRIPT
 
 chmod +x /usr/local/bin/brightness-control
 echo "  ✓ Script created"
+echo "  Screen brigthness step: 180"
+echo "  Keyboard light step: 25"
+echo "  Step delay: 0.05"
 
 echo ""
 echo -e "${YELLOW}[3/4] Creating udev rules...${NC}"
