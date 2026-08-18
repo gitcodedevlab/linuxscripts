@@ -12,6 +12,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
+echo ""
 echo -e "${GREEN}=== MacBook Pro 9,2 Keyboard Setup ===${NC}"
 
 if [ "$EUID" -ne 0 ]; then 
