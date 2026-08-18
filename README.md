@@ -1,4 +1,4 @@
-Install sudo and add user to sudo group:
+Install `sudo` and add user to `sudo` group:
 
 Run:
 
@@ -6,8 +6,8 @@ Run:
 su -
 ```
 
-Then:
+Then run replacing `USER` with your username:
 
 ```bash
-bash -c "$(wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/setup_sudo.sh)" -- USER
+wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/setup_sudo.sh| bash -s -- "USER"
 ```
