@@ -39,7 +39,7 @@ KBD_LIGHT="/sys/class/leds/smc::kbd_backlight"
 MAX_KBD=$(cat $KBD_LIGHT/max_brightness)
 STEP_KBD=30
 
-REPEAT_DELAY=0.1
+REPEAT_DELAY=0.5
 
 dec_display() {
     CURRENT=$(cat $BACKLIGHT/brightness)
