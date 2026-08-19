@@ -73,7 +73,7 @@ These scripts execute commands directly on your Linux system.
 |---|---|
 | `setup_sudo.sh` | Adds a user to the `sudo` group |
 | `install_wifi.sh` | Installs and configures Wi-Fi |
-| `install_wifi_v2.sh` | Installs and configures Wi-Fi enchanced |
+| `macbook_keyboard_setup.sh` | Install and Configure Keyboard keys for MacBook Mid 2012 |
 
 More scripts will be added over time.
 
