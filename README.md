@@ -92,5 +92,5 @@ git clone https://github.com/gitcodedevlab/linuxscripts.git
 Then run the desired script:
 
 ```bash
-sudo script "PARAM1" "PARAM2"
+sudo ./script.sh "PARAM1" "PARAM2"
 ```
