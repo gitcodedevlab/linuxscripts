@@ -49,7 +49,7 @@ wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/inst
 
 ---
 
-### 📡 Install and Configure Keyboard keys for MacBook Mid 2012
+### ⌨️ Install and Configure Keyboard keys for MacBook Mid 2012
 
 Installs the required keyboard and events to set Screen brightness and keyboard backlight
 
