@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 # MacBook Pro 9,2 - Keyboard Brightness & Backlight Installer
-# Usage: wget -qO- https://raw.githubusercontent.com/user/repo/main/macbook-keyboard-setup.sh | sudo bash
 #
 
 set -e
@@ -12,7 +11,6 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo ""
 echo -e "${GREEN}=== MacBook Pro 9,2 Keyboard Setup ===${NC}"
 
 if [ "$EUID" -ne 0 ]; then 
@@ -28,7 +26,7 @@ apt install -y acpid
 echo ""
 echo -e "${YELLOW}[2/4] Creating brightness control script...${NC}"
 
-sudo tee /usr/local/bin/brightness-control << 'EOF'
+cat > /usr/local/bin/brightness-control << 'SCRIPT'
 #!/bin/bash
 
 BACKLIGHT="/sys/class/backlight/intel_backlight"
@@ -73,13 +71,10 @@ case "$1" in
     kbd-down) dec_kbd ;;
     kbd-up) inc_kbd ;;
 esac
-EOF
+SCRIPT
 
-sudo chmod +x /usr/local/bin/brightness-control
+chmod +x /usr/local/bin/brightness-control
 echo "  ✓ Script created"
-echo "  Screen brigthness step: 180"
-echo "  Keyboard light step: 25"
-echo "  Step delay: 0.05"
 
 echo ""
 echo -e "${YELLOW}[3/4] Creating udev rules...${NC}"
@@ -102,25 +97,25 @@ echo "  ✓ udev rules applied"
 echo ""
 echo -e "${YELLOW}[4/4] Configuring acpid events...${NC}"
 
-sudo tee /etc/acpi/events/brightness-down << 'EOF'
+cat > /etc/acpi/events/brightness-down << 'ACPI'
 event=brightnessdown
 action=/usr/local/bin/brightness-control down
-EOF
+ACPI
 
-sudo tee /etc/acpi/events/brightness-up << 'EOF'
+cat > /etc/acpi/events/brightness-up << 'ACPI'
 event=brightnessup
 action=/usr/local/bin/brightness-control up
-EOF
+ACPI
 
-sudo tee /etc/acpi/events/kbd-illum-down << 'EOF'
+cat > /etc/acpi/events/kbd-illum-down << 'ACPI'
 event=kbdillumdown
 action=/usr/local/bin/brightness-control kbd-down
-EOF
+ACPI
 
-sudo tee /etc/acpi/events/kbd-illum-up << 'EOF'
+cat > /etc/acpi/events/kbd-illum-up << 'ACPI'
 event=kbdillumup
 action=/usr/local/bin/brightness-control kbd-up
-EOF
+ACPI
 
 systemctl restart acpid
 
@@ -128,8 +123,8 @@ echo ""
 echo -e "${GREEN}=== Setup completed successfully! ===${NC}"
 echo ""
 echo "Keyboard shortcuts configured:"
-echo "  Fn + F1  -> Decrease display brightness (hold for continuous)"
-echo "  Fn + F2  -> Increase display brightness (hold for continuous)"
-echo "  Fn + F5  -> Decrease keyboard backlight (hold for continuous)"
-echo "  Fn + F6  -> Increase keyboard backlight (hold for continuous)"
+echo "  Fn + F1  -> Decrease display brightness"
+echo "  Fn + F2  -> Increase display brightness"
+echo "  Fn + F5  -> Decrease keyboard backlight"
+echo "  Fn + F6  -> Increase keyboard backlight"
 echo ""
