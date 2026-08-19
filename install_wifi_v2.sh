@@ -93,16 +93,6 @@ fi
 log "Broadcom BCM4331 detected."
 
 # ----------------------------------------------------------------------
-# Check wireless interface
-# ----------------------------------------------------------------------
-
-if ! ip link show "${WIFI_IFACE}" >/dev/null 2>&1; then
-    error "Wireless interface ${WIFI_IFACE} was not found."
-fi
-
-log "Wireless interface ${WIFI_IFACE} detected."
-
-# ----------------------------------------------------------------------
 # Backup existing configuration
 # ----------------------------------------------------------------------
 
