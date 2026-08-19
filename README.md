@@ -19,7 +19,7 @@ Before running the scripts, make sure you have:
 
 ### 🔐 Install `sudo`
 
-Adds a user to the `sudo` group.
+Install sudo and adds a user to the `sudo` group.
 
 #### 1. Switch to root
 
