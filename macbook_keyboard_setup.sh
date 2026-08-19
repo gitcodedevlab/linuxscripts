@@ -28,20 +28,16 @@ apt install -y acpid
 echo ""
 echo -e "${YELLOW}[2/4] Creating brightness control script...${NC}"
 
-cat > /usr/local/bin/brightness-control << 'SCRIPT'
+sudo tee /usr/local/bin/brightness-control << 'EOF'
 #!/bin/bash
 
 BACKLIGHT="/sys/class/backlight/intel_backlight"
 MAX_DISPLAY=$(cat $BACKLIGHT/max_brightness)
 STEP_DISPLAY=180
 
-echo -e "${GREEN}=== MacBook Pro 9,2 Keyboard Setup ===${NC}"
-
 KBD_LIGHT="/sys/class/leds/smc::kbd_backlight"
 MAX_KBD=$(cat $KBD_LIGHT/max_brightness)
 STEP_KBD=25
-
-REPEAT_DELAY=0.2
 
 dec_display() {
     CURRENT=$(cat $BACKLIGHT/brightness)
@@ -72,46 +68,14 @@ inc_kbd() {
 }
 
 case "$1" in
-    down)
-        dec_display
-        if [ "$2" = "--repeat" ]; then
-            while [ "$(cat $BACKLIGHT/brightness)" -gt 1 ]; do
-                sleep $REPEAT_DELAY
-                dec_display
-            done
-        fi
-        ;;
-    up)
-        inc_display
-        if [ "$2" = "--repeat" ]; then
-            while [ "$(cat $BACKLIGHT/brightness)" -lt $MAX_DISPLAY ]; do
-                sleep $REPEAT_DELAY
-                inc_display
-            done
-        fi
-        ;;
-    kbd-down)
-        dec_kbd
-        if [ "$2" = "--repeat" ]; then
-            while [ "$(cat $KBD_LIGHT/brightness)" -gt 0 ]; do
-                sleep $REPEAT_DELAY
-                dec_kbd
-            done
-        fi
-        ;;
-    kbd-up)
-        inc_kbd
-        if [ "$2" = "--repeat" ]; then
-            while [ "$(cat $KBD_LIGHT/brightness)" -lt $MAX_KBD ]; do
-                sleep $REPEAT_DELAY
-                inc_kbd
-            done
-        fi
-        ;;
+    down) dec_display ;;
+    up) inc_display ;;
+    kbd-down) dec_kbd ;;
+    kbd-up) inc_kbd ;;
 esac
-SCRIPT
+EOF
 
-chmod +x /usr/local/bin/brightness-control
+sudo chmod +x /usr/local/bin/brightness-control
 echo "  ✓ Script created"
 echo "  Screen brigthness step: 180"
 echo "  Keyboard light step: 25"
@@ -138,25 +102,25 @@ echo "  ✓ udev rules applied"
 echo ""
 echo -e "${YELLOW}[4/4] Configuring acpid events...${NC}"
 
-cat > /etc/acpi/events/brightness-down << 'ACPI'
+sudo tee /etc/acpi/events/brightness-down << 'EOF'
 event=brightnessdown
-action=/usr/local/bin/brightness-control down --repeat
-ACPI
+action=/usr/local/bin/brightness-control down
+EOF
 
-cat > /etc/acpi/events/brightness-up << 'ACPI'
+sudo tee /etc/acpi/events/brightness-up << 'EOF'
 event=brightnessup
-action=/usr/local/bin/brightness-control up --repeat
-ACPI
+action=/usr/local/bin/brightness-control up
+EOF
 
-cat > /etc/acpi/events/kbd-illum-down << 'ACPI'
+sudo tee /etc/acpi/events/kbd-illum-down << 'EOF'
 event=kbdillumdown
-action=/usr/local/bin/brightness-control kbd-down --repeat
-ACPI
+action=/usr/local/bin/brightness-control kbd-down
+EOF
 
-cat > /etc/acpi/events/kbd-illum-up << 'ACPI'
+sudo tee /etc/acpi/events/kbd-illum-up << 'EOF'
 event=kbdillumup
-action=/usr/local/bin/brightness-control kbd-up --repeat
-ACPI
+action=/usr/local/bin/brightness-control kbd-up
+EOF
 
 systemctl restart acpid
 
