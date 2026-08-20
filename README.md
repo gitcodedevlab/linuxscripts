@@ -31,14 +31,14 @@ su -c "wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/ma
 
 ---
 
-### 📡 Install and Configure Wi-Fi v2 (Recommended)
+### 📡 Install and Configure Wi-Fi
 
 Installs the required Wi-Fi components and connects to a wireless network.
 
 Command will automatically asks for SSID and password:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/install_wifi_v2.sh | sudo bash
+wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/install_wifi.sh | sudo bash
 ```
 
 ---
@@ -49,6 +49,16 @@ Installs the required keyboard and events to set Screen brightness and keyboard 
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/macbook_keyboard_setup.sh | sudo bash
+```
+
+---
+
+### 💤 Disable sleep
+
+Disables sleep event when closing lid or idle
+
+```bash
+wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/disable_sleep.sh | sudo bash
 ```
 
 ---
@@ -67,7 +77,8 @@ These scripts execute commands directly on your Linux system.
 |---|---|
 | `setup_sudo.sh` | Adds a user to the `sudo` group |
 | `install_wifi.sh` | Installs and configures Wi-Fi |
-| `macbook_keyboard_setup.sh` | Install and Configure Keyboard keys for MacBook Mid 2012 |
+| `macbook_keyboard_setup.sh` | Installs and Configure Keyboard keys for MacBook Mid 2012 |
+| `disable_sleep.sh` | Disables sleep when closing lid or idle |
 
 More scripts will be added over time.
 
