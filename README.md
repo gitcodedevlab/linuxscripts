@@ -23,7 +23,7 @@ Install sudo and adds a user to the `sudo` group.
 
 #### 1. Run the script
 
-Replace `USER` with your username:
+Replace `$USER` with your username:
 
 ```bash
 su -c "wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/setup_sudo.sh | bash -s -- '$USER'"
