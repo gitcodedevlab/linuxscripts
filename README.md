@@ -21,18 +21,12 @@ Before running the scripts, make sure you have:
 
 Install sudo and adds a user to the `sudo` group.
 
-#### 1. Switch to root
-
-```bash
-su -
-```
-
-#### 2. Run the script
+#### 1. Run the script
 
 Replace `USER` with your username:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/setup_sudo.sh | bash -s -- "USER"
+su -c "wget -qO- https://raw.githubusercontent.com/gitcodedevlab/linuxscripts/main/setup_sudo.sh | bash -s -- '$USER'"
 ```
 
 ---
